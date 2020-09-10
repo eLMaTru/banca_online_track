@@ -43,4 +43,8 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    public boolean userNameExist(String username) {
+		return userRepository.userNameExists(username);
+	}
+
 }

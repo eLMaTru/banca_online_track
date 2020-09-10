@@ -7,11 +7,13 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "role")
 @Data // Lombok: adds getters and setters
 @AllArgsConstructor
+@NoArgsConstructor
 public class Role {
 
     @Id
@@ -69,7 +71,7 @@ public class Role {
             return id;
         }
 
-        public Role toRol() {
+        public Role toRole() {
             return new Role(id);
         }
 

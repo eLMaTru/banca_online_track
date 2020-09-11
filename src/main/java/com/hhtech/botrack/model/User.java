@@ -1,5 +1,6 @@
 package com.hhtech.botrack.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,8 +30,8 @@ public class User {
     private String password;
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
     private Role role;
 
 }

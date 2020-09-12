@@ -10,14 +10,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
 @Entity
 @Table(name = "user")
-@Data // Lombok: adds getters and setters
-public class User {
+@Setter(AccessLevel.PUBLIC)
+@Getter(AccessLevel.PUBLIC)
+public class User extends Auditable<String>  {
 
     @Id
     @Column(name = "user_id")

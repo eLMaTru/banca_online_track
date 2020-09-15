@@ -22,11 +22,6 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 
-    @GetMapping("/login")
-    public String login() {
-        System.out.println("On UserController.login");
 
-        return "login";
-    }
 
 }

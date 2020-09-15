@@ -15,8 +15,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Data;
-
 @Entity
 @Table(name = "user")
 @Setter(AccessLevel.PUBLIC)

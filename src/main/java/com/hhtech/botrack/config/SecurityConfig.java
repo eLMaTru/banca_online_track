@@ -65,9 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN).antMatchers("/user/**")
                 .hasAuthority(AuthoritiesConstants.ADMIN).and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
-                .defaultSuccessUrl("/home").failureUrl("/signIn/?error")
+                .defaultSuccessUrl("/home").failureUrl("/login/?error")
                 .failureHandler(userAuthenticationFailureHandler()).successHandler(userAuthenticationSuccessHandler())
-                .and().logout().logoutUrl("/logout/").logoutSuccessUrl("/home").deleteCookies("JSESSIONID")
+                .and().logout().logoutUrl("/logout/").logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true).and().sessionManagement().sessionFixation().migrateSession()
                 .invalidSessionUrl("/home");
 

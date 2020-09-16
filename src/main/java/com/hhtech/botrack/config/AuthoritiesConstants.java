@@ -13,7 +13,7 @@ public class AuthoritiesConstants {
     /**
      * The constant OWNER.
      */
-    public static final String OWNER = "OWNER";
+    public static final String SUPER_USER = "SUPER_USER";
 
     /**
      * The constant ADMIN.

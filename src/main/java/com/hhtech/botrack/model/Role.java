@@ -2,7 +2,10 @@ package com.hhtech.botrack.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +21,8 @@ public class Role {
 
     @Id
     @Column(name = "role_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     private String name;
@@ -53,7 +58,7 @@ public class Role {
 
     public enum Type {
 
-        ADMIN(1, "ADMIN"), USER(2, "USER"), SUPERVISOR(3, "SUPERVISOR"), OWNER(4, "OWNER");
+        SUPER_USER(1, "SUPER_USER"), ADMIN(2, "ADMIN"), SUPERVISOR(3, "SUPERVISOR"), USER(4, "USER ");
 
         private final long id;
         private final String name;

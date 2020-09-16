@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @Data // Lombok: adds getters and setters
-@EnableJpaAuditing(auditorAwareRef="customAuditorAware")
+@EnableJpaAuditing(auditorAwareRef = "customAuditorAware")
 public class Application {
 
 	@Autowired
@@ -39,8 +39,10 @@ public class Application {
 			user.setEmail("owner@test.com");
 			user.setPassword("owner");
 			user.setPasswordConfirm("owner");
-			user.setRole(Role.Type.OWNER.toRole());
-		
+			Role role = Role.Type.SUPER_USER.toRole();
+			role.setName("SUPER_USER");
+			role.setDescription("System Owner");
+			user.setRole(role);
 
 			userService.save(user);
 		}

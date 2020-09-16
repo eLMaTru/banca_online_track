@@ -51,13 +51,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().antMatchers("/owner/**")
-                .hasAuthority(AuthoritiesConstants.OWNER).antMatchers("/admin/**")
-                .hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.OWNER).antMatchers("/supervisor/**")
+                .hasAuthority(AuthoritiesConstants.SUPER_USER).antMatchers("/admin/**")
+                .hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.SUPER_USER)
+                .antMatchers("/supervisor/**")
                 .hasAnyAuthority(AuthoritiesConstants.SUPERVISOR, AuthoritiesConstants.ADMIN,
-                        AuthoritiesConstants.OWNER)
+                        AuthoritiesConstants.SUPER_USER)
                 .antMatchers("/user/**")
                 .hasAnyAuthority(AuthoritiesConstants.USER, AuthoritiesConstants.SUPERVISOR, AuthoritiesConstants.ADMIN,
-                        AuthoritiesConstants.OWNER)
+                        AuthoritiesConstants.SUPER_USER)
                 .antMatchers("/api/authenticate").permitAll().antMatchers("/api/account/reset_password/init")
                 .permitAll().antMatchers("/api/account/reset_password/finish").permitAll().antMatchers("/api/**")
                 .permitAll()// .authenticated()

@@ -59,15 +59,15 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
     }
 
     protected String determineTargetUrl(Authentication authentication) {
-        boolean isOwner = false;
+        boolean isSuperUser = false;
         boolean isAdmin = false;
         boolean isSupervisor = false;
         boolean isUser = false;
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals(AuthoritiesConstants.OWNER)) {
-                isOwner = true;
+            if (grantedAuthority.getAuthority().equals(AuthoritiesConstants.SUPER_USER)) {
+                isSuperUser = true;
                 break;
             } else if (grantedAuthority.getAuthority().equals(AuthoritiesConstants.ADMIN)) {
                 isAdmin = true;
@@ -81,7 +81,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
             }
         }
 
-        if (isOwner) {
+        if (isSuperUser) {
             return "/owner";
         } else if (isAdmin) {
             return "/admin";

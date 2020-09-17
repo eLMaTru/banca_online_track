@@ -34,8 +34,13 @@ public class User extends Auditable<String>  {
     private String password;
     private String email;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "status_id")
+    private Status status;
 
 }

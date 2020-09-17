@@ -1,61 +1,40 @@
 package com.hhtech.botrack.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
-@Table(name = "role")
+@Table(name = "status")
 @Data // Lombok: adds getters and setters
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+public class Status {
 
     @Id
-    @Column(name = "role_id")
+    @Column(name = "status_id")
     private Long id;
 
     private String name;
     private String description;
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        Role role = (Role) o;
-
-        if (id != role.id)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
-
-    @Override
     public String toString() {
         return getId() + ":" + getName();
     }
 
-    public Role(long id) {
+    public Status(long id) {
     }
 
     public enum Type {
 
-        ADMIN(1, "ADMIN"), USER(2, "USER"), SUPERVISOR(3, "SUPERVISOR"), OWNER(4, "OWNER"),
-        SUPER_USER(5, "SUPER_USER");
-
+        ENABLE(1, "ENABLED"), DISABLED(2, "DISABLED"), DELETED(3, "DELETED"), PENDING(4, "PENDING"),
+        COMPLETED(5, "COMPLETED"), CANCELED(6, "CANCELED"), REJECTED(7, "REJECTED");
         private final long id;
         private final String name;
 
@@ -72,8 +51,8 @@ public class Role {
             return id;
         }
 
-        public Role toRole() {
-            return new Role(id);
+        public Status toStatus() {
+            return new Status(id);
         }
 
     }

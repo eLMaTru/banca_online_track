@@ -1,6 +1,5 @@
 package com.hhtech.botrack.service;
 
-import com.hhtech.botrack.model.Role;
 import com.hhtech.botrack.model.User;
 import com.hhtech.botrack.repository.RoleRepository;
 import com.hhtech.botrack.repository.UserRepository;
@@ -27,7 +26,6 @@ public class UserService {
 
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(new Role(1L, "ENABLED", "Item is Enabled"));
         userRepository.save(user);
     }
 
@@ -44,7 +42,7 @@ public class UserService {
     }
 
     public boolean userNameExist(String username) {
-		return userRepository.userNameExists(username);
-	}
+        return userRepository.userNameExists(username);
+    }
 
 }

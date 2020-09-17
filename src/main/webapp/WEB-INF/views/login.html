@@ -5,7 +5,7 @@
   xmlns:th="https://www.thymeleaf.org"
   xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
-<head th:insert="fragments/head :: head"></head>
+  <head th:insert="fragments/head :: head"></head>
 
   <body>
     <!-- Loader -->
@@ -86,7 +86,7 @@
 
                     <div class="form-group m-t-30">
                       <div class="col-sm-12">
-                        <a href="page-recoverpw.html" class="text-muted"
+                        <a href="recovery-password" class="text-muted"
                           ><i class="fa fa-lock m-r-5"></i> Olvidaste tu
                           clave?</a
                         >
@@ -117,9 +117,6 @@
       </div>
     </section>
     <!-- END HOME -->
-
-
   </body>
-<div th:insert="fragments/foot :: footer"></div>
-
+  <div th:insert="fragments/foot :: footer"></div>
 </html>

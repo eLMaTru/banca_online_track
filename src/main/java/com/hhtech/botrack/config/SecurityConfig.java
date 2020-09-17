@@ -50,9 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().antMatchers("/owner/**")
-                .hasAuthority(AuthoritiesConstants.SUPER_USER).antMatchers("/admin/**")
-                .hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.SUPER_USER)
+        http.csrf().disable().authorizeRequests().antMatchers("/login", "/recovery-password", "/reset-password")
+                .permitAll().antMatchers("/owner/**").hasAuthority(AuthoritiesConstants.SUPER_USER)
+                .antMatchers("/admin/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.SUPER_USER)
                 .antMatchers("/supervisor/**")
                 .hasAnyAuthority(AuthoritiesConstants.SUPERVISOR, AuthoritiesConstants.ADMIN,
                         AuthoritiesConstants.SUPER_USER)

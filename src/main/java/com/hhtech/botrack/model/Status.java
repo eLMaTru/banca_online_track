@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,8 @@ public class Status {
 
     @Id
     @Column(name = "status_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     private String name;
@@ -35,6 +40,7 @@ public class Status {
 
         ENABLE(1, "ENABLED"), DISABLED(2, "DISABLED"), DELETED(3, "DELETED"), PENDING(4, "PENDING"),
         COMPLETED(5, "COMPLETED"), CANCELED(6, "CANCELED"), REJECTED(7, "REJECTED");
+
         private final long id;
         private final String name;
 

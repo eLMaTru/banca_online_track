@@ -14,19 +14,41 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "status")
-@Data // Lombok: adds getters and setters
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Status {
 
     @Id
     @Column(name = "status_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "identityGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(length = 12)
     private String name;
+    @Column(length = 40)
     private String description;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Status status = (Status) o;
+
+        if (id != status.id)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 
     @Override
     public String toString() {
@@ -38,7 +60,7 @@ public class Status {
 
     public enum Type {
 
-        ENABLE(1, "ENABLED"), DISABLED(2, "DISABLED"), DELETED(3, "DELETED"), PENDING(4, "PENDING"),
+        ENABLED(1, "ENABLED"), DISABLED(2, "DISABLED"), DELETED(3, "DELETED"), PENDING(4, "PENDING"),
         COMPLETED(5, "COMPLETED"), CANCELED(6, "CANCELED"), REJECTED(7, "REJECTED");
 
         private final long id;

@@ -21,11 +21,13 @@ public class Role {
 
     @Id
     @Column(name = "role_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "identityGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(length = 10)
     private String name;
+    @Column(length = 20)
     private String description;
 
     @Override
@@ -58,7 +60,7 @@ public class Role {
 
     public enum Type {
 
-        SUPER_USER(1, "SUPER_USER"), ADMIN(2, "ADMIN"), SUPERVISOR(3, "SUPERVISOR"), USER(4, "USER ");
+        SUPER_USER(1, "SUPER_USER"), ADMIN(2, "ADMIN"), SUPERVISOR(3, "SUPERVISOR"), USER(4, "USER");
 
         private final long id;
         private final String name;

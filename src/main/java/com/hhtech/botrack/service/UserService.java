@@ -2,6 +2,7 @@ package com.hhtech.botrack.service;
 
 import com.hhtech.botrack.model.User;
 import com.hhtech.botrack.repository.RoleRepository;
+import com.hhtech.botrack.repository.StatusRepository;
 import com.hhtech.botrack.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private StatusRepository statusRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 

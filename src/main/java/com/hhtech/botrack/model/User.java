@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,7 +20,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "user")
 @Setter(AccessLevel.PUBLIC)
 @Getter(AccessLevel.PUBLIC)
-public class User extends Auditable<String>  {
+@AllArgsConstructor
+public class User extends Auditable<String> {
 
     @Id
     @Column(name = "user_id")
@@ -32,7 +34,6 @@ public class User extends Auditable<String>  {
     private String password;
     private String email;
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
@@ -40,5 +41,9 @@ public class User extends Auditable<String>  {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Status status;
+
+    public User() {
+        super();
+    }
 
 }

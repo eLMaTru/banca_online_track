@@ -61,7 +61,7 @@
                 <div class="account-content">
                   <div class="text-center m-b-20">
                     <div class="m-b-20">
-                      <div class="checkmark">
+                      <div class="checkmark" th:unless="${error}">
                         <svg
                           version="1.1"
                           id="Layer_1"
@@ -118,12 +118,22 @@
                       </div>
                     </div>
 
-                    <p class="text-muted font-13 m-t-10">
-                      Se ha enviado un correo electrónico a
-                      <b> <span th:text="${email}" /> </b>. Comprueba si hay un
-                      correo electrónico de <b>horizon.h.tech</b> y has click en
-                      el enlace incluido para restablecer tu contraseña.
-                    </p>
+                    <div th:if="${error}" style="color: white">
+                      <p class="text-muted font-13 m-t-10" style="color: red">
+                        El Correo especificado no esta registrado o no ha sido
+                        validado.
+                      </p>
+                    </div>
+
+                    <div th:unless="${error}" style="color: white">
+                      <p class="text-muted font-13 m-t-10">
+                        Se ha enviado un correo electrónico a
+                        <b> <span th:text="${email}" /> </b>. Comprueba si hay
+                        un correo electrónico de <b>horizon.h.tech</b> y has
+                        click en el enlace incluido para restablecer tu
+                        contraseña.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

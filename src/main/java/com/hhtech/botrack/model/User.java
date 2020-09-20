@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.hhtech.botrack.Util;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,14 +26,17 @@ import org.hibernate.annotations.GenericGenerator;
 public class User extends Auditable<String> {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "user_id", length = Util.UUID_LENGTH)
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+    @Column(length = 20)
     private String username;
+    @Column(length = 200)
+    private String password;
     @Transient
     private String passwordConfirm;
-    private String password;
+    @Column(length = 50)
     private String email;
 
     @ManyToOne(cascade = CascadeType.ALL)

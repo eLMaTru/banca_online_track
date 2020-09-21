@@ -23,12 +23,18 @@ public class Consortium extends Auditable<String> {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false)
+    @JoinColumn(name = "status_id")
     private Status status;
 
     @ManyToMany
     @JoinTable(name = "consortium_partner", joinColumns = {
             @JoinColumn(name = "consortium_id") }, inverseJoinColumns = { @JoinColumn(name = "partner_id") })
     private List<Partner> partners;
+
+    @Override
+    public String toString() {
+        return "Consortium [id=" + id + ", name=" + name + ", partners=" + partners + ", status=" + status.toString()
+                + "]";
+    }
 
 }

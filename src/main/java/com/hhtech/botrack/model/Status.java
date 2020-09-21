@@ -1,6 +1,5 @@
 package com.hhtech.botrack.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,47 +14,32 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "status")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Status {
 
     @Id
-    @Column(name = "status_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "identityGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "status_id")
     private Long id;
 
-    @Column(length = 12)
+    @Column(length = 12, unique = true)
     private String name;
     @Column(length = 40)
     private String description;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        Status status = (Status) o;
-
-        if (id != status.id)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
 
     @Override
     public String toString() {
         return getId() + ":" + getName();
     }
 
-    public Status(long id) {
+    public Status(Long id) {
+        this.id = id;
+    }
+
+    public Status(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public enum Type {
@@ -66,7 +50,7 @@ public class Status {
         private final long id;
         private final String name;
 
-        private Type(long id, String name) {
+        Type(int id, String name) {
             this.id = id;
             this.name = name;
         }
@@ -80,7 +64,7 @@ public class Status {
         }
 
         public Status toStatus() {
-            return new Status(id);
+            return new Status(id, name);
         }
 
     }

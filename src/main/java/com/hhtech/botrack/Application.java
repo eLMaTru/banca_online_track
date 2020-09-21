@@ -15,7 +15,7 @@ import lombok.Data;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@Data // Lombok: adds getters and setters
+@Data
 @EnableJpaAuditing(auditorAwareRef = "customAuditorAware")
 public class Application {
 
@@ -52,5 +52,4 @@ public class Application {
 			userService.save(user);
 		}
 	}
-
 }

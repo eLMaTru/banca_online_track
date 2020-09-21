@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.MessagingException;
-
 import com.hhtech.botrack.config.CustomPropertyConfig;
 import com.hhtech.botrack.model.Mail;
 import com.hhtech.botrack.service.EmailSenderService;
@@ -47,7 +45,6 @@ public class RecoveryPasswordController {
 
     @GetMapping("/recovery-password")
     public String recoveryPassword(Mail mail) {
-
         return "recoverpw";
     }
 

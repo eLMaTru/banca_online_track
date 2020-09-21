@@ -8,20 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "role")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Role {
 
     @Id
     @Column(name = "role_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "identityGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
@@ -56,6 +54,12 @@ public class Role {
     }
 
     public Role(long id) {
+        this.id = id;
+    }
+
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public enum Type {
@@ -79,7 +83,7 @@ public class Role {
         }
 
         public Role toRole() {
-            return new Role(id);
+            return new Role(id, name);
         }
 
     }

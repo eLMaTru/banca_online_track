@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Service
 @Data // Lombok: adds getters and setters
 public class UserService {
@@ -45,4 +47,8 @@ public class UserService {
         return userRepository.userNameExists(username);
     }
 
+
+    public List<User> findAll(){
+       return userRepository.findAll();
+    }
 }

@@ -1,12 +1,15 @@
 package com.hhtech.botrack.model;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,22 +20,22 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 
 @Entity
-@Table(name = "banker")
+@Table(name = "supervisor")
 @Data
-public class Banker extends Person {
+public class Supervisor extends Person {
     @Id
-    @Column(name = "banker_id", length = Util.UUID_LENGTH)
+    @Column(name = "supervisor_id", length = Util.UUID_LENGTH)
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "bank_id")
-    private Bank bank;
+    @JoinColumn(name = "partner_id", nullable = false)
+    private Partner partner;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false)
-    private Status status;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "start_date")
     private Calendar startDate;
@@ -42,5 +45,14 @@ public class Banker extends Person {
 
     @Column(name = "salary")
     private double salary;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private Status status;
+
+    @ManyToMany
+    @JoinTable(name = "supervisor_bank", joinColumns = { @JoinColumn(name = "supervisor_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "bank_id") })
+    private List<Bank> banks;
 
 }

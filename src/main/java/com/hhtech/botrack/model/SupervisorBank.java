@@ -1,8 +1,5 @@
 package com.hhtech.botrack.model;
 
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,23 +11,27 @@ import javax.persistence.Table;
 
 import com.hhtech.botrack.Util;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import lombok.Data;
+
 @Entity
-@Table(name = "consortium_partner")
+@Table(name = "supervisor_bank")
 @Data
-public class ConsortiumPartner {
+public class SupervisorBank {
 
     @Id
-    @Column(name = "consortium_partner_id", length = Util.UUID_LENGTH)
+    @Column(name = "supervisor_bank_id", length = Util.UUID_LENGTH)
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "consortium_id", nullable = false)
-    private Consortium consortium;
+    @JoinColumn(name = "supervisor_id", nullable = false)
+    private Supervisor supervisor;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "partner_id", nullable = false)
-    private Partner partner;
+    @JoinColumn(name = "bank_id", nullable = false)
+    private Bank bank;
 
 }

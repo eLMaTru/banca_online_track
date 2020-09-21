@@ -1,9 +1,9 @@
 package com.hhtech.botrack.model;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -11,8 +11,7 @@ import com.hhtech.botrack.Util;
 
 @Entity
 @Table(name = "consortium")
-@Setter(AccessLevel.PUBLIC)
-@Getter(AccessLevel.PUBLIC)
+@Data
 public class Consortium extends Auditable<String> {
 
     @Id
@@ -20,11 +19,16 @@ public class Consortium extends Auditable<String> {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-    @Column(length = 20)
+    @Column(length = 20, nullable = false, unique = true)
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "status_id", nullable = false)
     private Status status;
+
+    @ManyToMany
+    @JoinTable(name = "consortium_partner", joinColumns = {
+            @JoinColumn(name = "consortium_id") }, inverseJoinColumns = { @JoinColumn(name = "partner_id") })
+    private List<Partner> partners;
 
 }

@@ -30,21 +30,21 @@ public class User extends Auditable<String> {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-    @Column(length = 20)
+    @Column(length = 20, nullable = false, unique = true)
     private String username;
-    @Column(length = 200)
+    @Column(length = 200, nullable = false)
     private String password;
     @Transient
     private String passwordConfirm;
-    @Column(length = 50)
+    @Column(length = 50, nullable = false, unique = true)
     private String email;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
     public User() {

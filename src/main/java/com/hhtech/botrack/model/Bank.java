@@ -42,7 +42,7 @@ public class Bank extends Auditable<String> {
     private Partner partner;
 
     @ManyToOne
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
 }

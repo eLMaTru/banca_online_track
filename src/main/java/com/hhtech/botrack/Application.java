@@ -3,6 +3,7 @@ package com.hhtech.botrack;
 import javax.annotation.PostConstruct;
 
 import com.hhtech.botrack.model.Role;
+import com.hhtech.botrack.model.Status;
 import com.hhtech.botrack.model.User;
 import com.hhtech.botrack.service.UserService;
 
@@ -14,7 +15,7 @@ import lombok.Data;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@Data // Lombok: adds getters and setters
+@Data
 @EnableJpaAuditing(auditorAwareRef = "customAuditorAware")
 public class Application {
 
@@ -43,9 +44,12 @@ public class Application {
 			role.setName("SUPER_USER");
 			role.setDescription("System Owner");
 			user.setRole(role);
+			Status status = Status.Type.ENABLED.toStatus();
+			status.setName("ENABLED");
+			status.setDescription("Item is enabled");
+			user.setStatus(status);
 
 			userService.save(user);
 		}
 	}
-
 }

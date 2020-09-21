@@ -10,7 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.hhtech.botrack.Util;
+
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,26 +22,33 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "user")
 @Setter(AccessLevel.PUBLIC)
 @Getter(AccessLevel.PUBLIC)
-public class User extends Auditable<String>  {
+@AllArgsConstructor
+public class User extends Auditable<String> {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "user_id", length = Util.UUID_LENGTH)
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+    @Column(length = 20, nullable = false, unique = true)
     private String username;
+    @Column(length = 200, nullable = false)
+    private String password;
     @Transient
     private String passwordConfirm;
-    private String password;
+    @Column(length = 50, nullable = false, unique = true)
     private String email;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
     private Status status;
+
+    public User() {
+        super();
+    }
 
 }

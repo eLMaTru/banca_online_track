@@ -8,14 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "role")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Role {
 
@@ -25,7 +23,9 @@ public class Role {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(length = 10)
     private String name;
+    @Column(length = 20)
     private String description;
 
     @Override
@@ -54,11 +54,17 @@ public class Role {
     }
 
     public Role(long id) {
+        this.id = id;
+    }
+
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public enum Type {
 
-        SUPER_USER(1, "SUPER_USER"), ADMIN(2, "ADMIN"), SUPERVISOR(3, "SUPERVISOR"), USER(4, "USER ");
+        SUPER_USER(1, "SUPER_USER"), ADMIN(2, "ADMIN"), SUPERVISOR(3, "SUPERVISOR"), USER(4, "USER");
 
         private final long id;
         private final String name;
@@ -77,7 +83,7 @@ public class Role {
         }
 
         public Role toRole() {
-            return new Role(id);
+            return new Role(id, name);
         }
 
     }

@@ -23,29 +23,32 @@ public class Auditable<U> {
 
     /**
      * createdDate
-     * */
-    @Column(nullable = false, updatable = false)
+     */
+    @Column(name = "created_date", nullable = false, updatable = false)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar createdDate;
 
     /**
      * lastModifiedDate
-     * */
+     */
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_modified_date")
     private Calendar lastModifiedDate;
 
     /**
      * createBy
-     * */
+     */
     @CreatedBy
+    @Column(name = "created_by", length = 20)
     private U createdBy;
 
     /**
      * lastModifiedBy
-     * */
+     */
     @LastModifiedBy
+    @Column(name = "last_modified_by", length = 20)
     private U lastModifiedBy;
 
 }

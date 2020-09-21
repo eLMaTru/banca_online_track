@@ -5,8 +5,10 @@ import java.nio.charset.StandardCharsets;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import com.amazonaws.services.simpleemail.model.MessageRejectedException;
 import com.hhtech.botrack.model.Mail;
 
+import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -14,7 +16,10 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import lombok.extern.log4j.Log4j2;
+
 @Service
+@Log4j2
 public class EmailSenderService {
 
   private JavaMailSender javaMailSender;
@@ -27,18 +32,23 @@ public class EmailSenderService {
   }
 
   @Async
-  public void sendEmail(Mail mail) throws MessagingException {
-      MimeMessage message = getMimeMessage(mail);
+  public boolean sendEmail(Mail mail) {
+    MimeMessage message;
+    try {
+      message = getMimeMessage(mail);
       javaMailSender.send(message);
+      return true;
+    } catch (MailSendException | MessagingException | MessageRejectedException e) {
+      log.error("EmailSenderService.sendEmail: {}", e.getMessage());
+      return false;
+    }
+
   }
 
   private MimeMessage getMimeMessage(Mail mail) throws MessagingException {
     MimeMessage message = javaMailSender.createMimeMessage();
-    MimeMessageHelper helper =
-        new MimeMessageHelper(
-            message,
-            MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-            StandardCharsets.UTF_8.name());
+    MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+        StandardCharsets.UTF_8.name());
 
     Context context = new Context();
     context.setVariables(mail.getModel());

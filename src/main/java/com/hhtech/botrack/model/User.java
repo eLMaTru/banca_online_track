@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import com.hhtech.botrack.Util;
 
@@ -17,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "user")
@@ -30,25 +33,37 @@ public class User extends Auditable<String> {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-    @Column(length = 20, nullable = false, unique = true)
+
+    @NotBlank
+    @Length(max = 20, min = 4)
+    @Column()
     private String username;
-    @Column(length = 200, nullable = false)
+
+    @NotBlank
+    @Length(max = 200, min = 6)
+    @Column()
     private String password;
+
     @Transient
     private String passwordConfirm;
-    @Column(length = 50, nullable = false, unique = true)
+
+    @NotBlank
+    @Length(max = 50, min = 6)
+    @Pattern(regexp = Util.EMAIL_PATTERN,message = "Email incorrecto")
+    @Column()
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id")
     private Role role;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", nullable = false)
+    @JoinColumn(name = "status_id")
     private Status status;
 
     public User() {
         super();
     }
+
 
 }

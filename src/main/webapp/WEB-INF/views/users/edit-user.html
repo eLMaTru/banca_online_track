@@ -22,6 +22,12 @@
     <table>
 
         <tr>
+            <td><label for="id">ID</label></td>
+            <td><input readonly type="text" th:field="*{id}" id="id" placeholder="username">
+                <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span></td>
+        </tr>
+
+        <tr>
             <td><label for="username">Usuario</label></td>
             <td><input type="text" th:field="*{username}" id="username" placeholder="username">
                 <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></td>

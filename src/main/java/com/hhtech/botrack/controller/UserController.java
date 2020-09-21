@@ -1,6 +1,8 @@
 package com.hhtech.botrack.controller;
 
+import com.hhtech.botrack.model.Role;
 import com.hhtech.botrack.model.User;
+import com.hhtech.botrack.service.RoleService;
 import com.hhtech.botrack.service.SecurityService;
 import com.hhtech.botrack.service.UserService;
 import com.hhtech.botrack.validation.UserValidator;
@@ -12,23 +14,34 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.Data;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Data // Lombok: adds getters and setters
 public class UserController {
-    @Autowired
+
     private UserService userService;
 
-    @Autowired
     private SecurityService securityService;
 
-    @Autowired
     private UserValidator userValidator;
+
+    private RoleService roleService;
+
+    public UserController(UserService userService, RoleService roleService,
+                          SecurityService securityService,UserValidator userValidator){
+        this.userService = userService;
+        this.roleService = roleService;
+        this.securityService = securityService;
+        this.userValidator = userValidator;
+    }
 
     @GetMapping("/owner")
     public String superUser() {// Solo para probar el login
@@ -36,7 +49,14 @@ public class UserController {
     }
 
     @GetMapping("/users/adduser")
-    public String addUser(){
+    public String addUser(Model model){
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("roles",roleService.findAll());
+        map.put("user",new User());
+
+        model.addAllAttributes(map);
+
         return "/users/add-user";
     }
 
@@ -49,22 +69,36 @@ public class UserController {
     }
 
 
-    /*@PostMapping("/user/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
+    @PostMapping("/users/saveuser")
+    public String saveUser(@Valid User user, BindingResult result, Model model) {
+
+        model.addAttribute("user",user);
+        model.addAttribute("roles",roleService.findAll());
+
         if (result.hasErrors()) {
-            return "add-user";
+
+            return "/users/add-user";
         }
 
-        //userRepository.save(user);
-        User user1 = new User();
-        user1.setUsername("test 1");
-        List<User> test = new ArrayList<>();
-        test.add(user1);
+        userService.save(user);
 
-        //model.addAttribute("users", userRepository.findAll());
-        model.addAttribute("users", test);
+        return "redirect:/users/";
+    }
 
-        return "redirect:/index";
-    }*/
+    @GetMapping("/users/edituser/{id}")
+    public String editUser(@PathVariable("id") String id, Model model) {
 
+        model.addAttribute("user",userService.findOne(id));
+        model.addAttribute("roles",roleService.findAll());
+
+        return "/users/edit-user";
+    }
+
+    @GetMapping("/users/deleteuser/{id}")
+    public String deleteUser(@PathVariable("id") String id, Model model) {
+
+        userService.deleteOne(id);
+
+        return "redirect:/users/";
+    }
 }

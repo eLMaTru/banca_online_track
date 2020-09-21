@@ -15,8 +15,8 @@ import java.util.Calendar;
 /**
  * The type Auditable.
  */
-@Getter(AccessLevel.PROTECTED)
-@Setter(AccessLevel.PROTECTED)
+@Getter(AccessLevel.PUBLIC)
+@Setter(AccessLevel.PUBLIC)
 @EntityListeners({ AuditingEntityListener.class })
 @MappedSuperclass
 public class Auditable<U> {

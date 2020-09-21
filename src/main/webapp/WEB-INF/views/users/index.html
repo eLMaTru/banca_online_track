@@ -26,17 +26,21 @@
         </form>
 
         <br/>
-        <div class="table-responsive col-md-6">
+        <div class="table-responsive col-md-12">
             <div th:switch="${users}">
                 <h2 th:case="null">No users yet!</h2>
                 <div th:case="*">
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
-                            <th>Nombre</th>
+                            <th>Usuario</th>
                             <th>Email</th>
                             <th>Rol</th>
                             <th>Estado</th>
+                            <th>Creado</th>
+                            <th>Fecha de creacion</th>
+                            <th>Modificado</th>
+                            <th>Fecha de modificacion</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>
@@ -52,15 +56,20 @@
                             <td>
                                 <span class="label label-success">Activo</span>
                             </td>
+                            <td  th:text="${user.createdBy}"></td>
+                            <td  th:text="${#dates.format(user.createdDate, 'dd-MM-yyyy')}"></td>
 
-                            <td><a th:href="@{/edit/{id}(id=${user.id})}" title="Editar datos" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                            <td><a th:href="@{/delete/{id}(id=${user.id})}" title="Eliminar" onclick="return confirm('Esta seguro de borrar los datos')" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                            <td  th:text="${user.lastModifiedBy}"></td>
+                            <td  th:text="${#dates.format(user.lastModifiedDate, 'dd-MM-yyyy')}"></td>
+
+                            <td><a th:href="@{/users/edituser/{id}(id=${user.id})}" title="Editar datos" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                            <td><a th:href="@{/users/deleteuser/{id}(id=${user.id})}" title="Eliminar" onclick="return confirm('Esta seguro de borrar los datos')" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
 
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <p><a href="/signup">Add a new user</a></p>
+                <p><a href="/users/adduser">Add a new user</a></p>
 
             </div>
         </div>

@@ -1,5 +1,6 @@
 package com.hhtech.botrack.service;
 
+import com.fasterxml.jackson.annotation.OptBoolean;
 import com.hhtech.botrack.model.User;
 import com.hhtech.botrack.repository.RoleRepository;
 import com.hhtech.botrack.repository.StatusRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Data // Lombok: adds getters and setters
@@ -53,5 +55,20 @@ public class UserService {
 
     public List<User> findAll(){
        return userRepository.findAll();
+    }
+
+    public User findOne(String id){
+
+        var user = userRepository.getOne(id);
+
+        if (user == null ){
+            throw new IllegalArgumentException("ID does not exist");
+        }
+
+        return user;
+    }
+
+    public void deleteOne(String id){
+        userRepository.deleteById(id);
     }
 }

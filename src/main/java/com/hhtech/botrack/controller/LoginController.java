@@ -9,7 +9,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login() {
-        System.out.println(LoginController.class.getSimpleName());
 
         return "login";
     }

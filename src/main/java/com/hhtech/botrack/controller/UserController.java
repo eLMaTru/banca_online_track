@@ -1,13 +1,12 @@
 package com.hhtech.botrack.controller;
 
-import com.hhtech.botrack.model.Role;
 import com.hhtech.botrack.model.User;
 import com.hhtech.botrack.service.RoleService;
 import com.hhtech.botrack.service.SecurityService;
 import com.hhtech.botrack.service.UserService;
 import com.hhtech.botrack.validation.UserValidator;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,8 +32,8 @@ public class UserController {
 
     private RoleService roleService;
 
-    public UserController(UserService userService, RoleService roleService,
-                          SecurityService securityService,UserValidator userValidator){
+    public UserController(UserService userService, RoleService roleService, SecurityService securityService,
+            UserValidator userValidator) {
         this.userService = userService;
         this.roleService = roleService;
         this.securityService = securityService;
@@ -44,16 +41,25 @@ public class UserController {
     }
 
     @GetMapping("/owner")
-    public String superUser() {// Solo para probar el login
-        return "super_user";
+    public String superUser(Model model, @CurrentSecurityContext(expression = "authentication.name") String username) {
+        // note: usar condicion: username = people.name !=
+        // null?people.name:user.username
+        model.addAttribute("username", username);
+        return "super-user";
+    }
+
+    @GetMapping("/owner/user")
+    public String viewUsers(Model model, @CurrentSecurityContext(expression = "authentication.name") String username) {
+        model.addAttribute("username", username);
+        return "user";
     }
 
     @GetMapping("/users/adduser")
-    public String addUser(Model model){
+    public String addUser(Model model) {
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("roles",roleService.findAll());
-        map.put("user",new User());
+        Map<String, Object> map = new HashMap<>();
+        map.put("roles", roleService.findAll());
+        map.put("user", new User());
 
         model.addAllAttributes(map);
 
@@ -61,19 +67,18 @@ public class UserController {
     }
 
     @GetMapping("/users/")
-    public String index(Model model){
+    public String index(Model model) {
 
         model.addAttribute("users", userService.findAll());
         return "/users/index";
 
     }
 
-
     @PostMapping("/users/saveuser")
     public String saveUser(@Valid User user, BindingResult result, Model model) {
 
-        model.addAttribute("user",user);
-        model.addAttribute("roles",roleService.findAll());
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.findAll());
 
         if (result.hasErrors()) {
 
@@ -88,8 +93,8 @@ public class UserController {
     @GetMapping("/users/edituser/{id}")
     public String editUser(@PathVariable("id") String id, Model model) {
 
-        model.addAttribute("user",userService.findOne(id));
-        model.addAttribute("roles",roleService.findAll());
+        model.addAttribute("user", userService.findOne(id));
+        model.addAttribute("roles", roleService.findAll());
 
         return "/users/edit-user";
     }

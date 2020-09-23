@@ -5,22 +5,9 @@
   xmlns:th="https://www.thymeleaf.org"
   xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
-  <head th:insert="fragments/head :: head"></head>
+  <head th:insert="fragments/global :: head"></head>
 
-  <body>
-    <!-- Loader -->
-    <div id="preloader">
-      <div id="status">
-        <div class="spinner">
-          <div class="spinner-wrapper">
-            <div class="rotator">
-              <div class="inner-spin"></div>
-              <div class="inner-spin"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <body class="bg-transparent">
     <!-- HOME -->
     <section>
       <div class="container-alt">
@@ -118,5 +105,5 @@
     </section>
     <!-- END HOME -->
   </body>
-  <div th:insert="fragments/foot :: footer"></div>
+  <div th:insert="fragments/global :: footer"></div>
 </html>

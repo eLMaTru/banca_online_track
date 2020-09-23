@@ -17,7 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 /**
  * The type Security config.
  */
@@ -45,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bower_components/**").antMatchers("/i18n/**").antMatchers("/content/**")
                 .antMatchers("/swagger-ui/index.html").antMatchers("/test/**");
         web.ignoring().antMatchers("/resources/**", "/i18n/**", "/static/**", "/bancaonlinetrack/**", "/assets/**",
-                "/css/**", "/js/**", "/images/**", "/images/icons/**", "/fonts/**");
+                "/css/**", "/js/**", "/images/**", "/images/icons/**", "/fonts/**", "/plugins*");
 
     }
 
@@ -117,6 +116,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
-
 
 }

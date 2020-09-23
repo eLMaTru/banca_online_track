@@ -12,11 +12,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
+
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @Data
 @EnableJpaAuditing(auditorAwareRef = "customAuditorAware")
+@Log4j2
 public class Application {
 
 	@Autowired
@@ -49,7 +52,13 @@ public class Application {
 			status.setDescription("Item is enabled");
 			user.setStatus(status);
 
-			userService.save(user);
+			try {
+				userService.save(user);
+			} catch (Exception e) {
+				log.warn("*** No se pudo gualdar el Usuario inicial \"{}\" porque el data.sql aun no se ha ejecutado. "
+						+ "Este usuario se creara la proxima vez que corra la App ***", user.getUsername());
+			}
+
 		}
 	}
 }

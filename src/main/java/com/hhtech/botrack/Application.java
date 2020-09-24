@@ -41,10 +41,9 @@ public class Application {
 			User user = new User();
 			user.setUsername("owner");
 			user.setEmail("owner@test.com");
-			user.setPassword("owner");
+			user.setPassword("ownerpass");
 			user.setPasswordConfirm("owner");
 			Role role = Role.Type.SUPER_USER.toRole();
-			role.setName("SUPER_USER");
 			role.setDescription("System Owner");
 			user.setRole(role);
 			Status status = Status.Type.ENABLED.toStatus();
@@ -57,8 +56,6 @@ public class Application {
 			} catch (Exception e) {
 				log.warn("*** No se pudo gualdar el Usuario inicial \"{}\" porque el data.sql aun no se ha ejecutado. "
 						+ "Este usuario se creara la proxima vez que corra la App ***", user.getUsername());
-
-				log.error("*** Error: Application.createFirstUser: {} ***", e.getCause());
 			}
 
 		}

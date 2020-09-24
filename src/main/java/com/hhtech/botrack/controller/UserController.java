@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -33,6 +36,8 @@ public class UserController {
 
     private RoleService roleService;
 
+    private final List<Status> status = new ArrayList<>(2);
+
     public UserController(UserService userService, RoleService roleService, SecurityService securityService,
             UserValidator userValidator) {
         this.userService = userService;
@@ -46,6 +51,17 @@ public class UserController {
         // note: usar condicion: username = people.name !=
         // null?people.name:user.username
         model.addAttribute("username", username);
+        model.addAttribute("users", userService.findByStatusNotDeleted());
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("roles", roleService.findAll());
+        status.clear();
+        status.add(Status.Type.ENABLED.toStatus());
+        status.add(Status.Type.DISABLED.toStatus());
+        map.put("status", status);
+        map.put("user", new User());
+
+        model.addAllAttributes(map);
         return "super-user";
     }
 
@@ -56,6 +72,10 @@ public class UserController {
 
         Map<String, Object> map = new HashMap<>();
         map.put("roles", roleService.findAll());
+        status.clear();
+        status.add(Status.Type.ENABLED.toStatus());
+        status.add(Status.Type.DISABLED.toStatus());
+        map.put("status", status);
         map.put("user", new User());
 
         model.addAllAttributes(map);
@@ -71,10 +91,9 @@ public class UserController {
 
         if (result.hasErrors()) {
 
-            return "user";
+            return "redirect:/owner/users?error=true";
         }
 
-        user.setStatus(Status.Type.ENABLED.toStatus());
         userService.save(user);
 
         return "redirect:/owner/users";
@@ -85,6 +104,10 @@ public class UserController {
 
         model.addAttribute("user", userService.findOne(id));
         model.addAttribute("roles", roleService.findAll());
+        status.clear();
+        status.add(Status.Type.ENABLED.toStatus());
+        status.add(Status.Type.DISABLED.toStatus());
+        model.addAttribute("status", status);
         model.addAttribute("users", userService.findByStatusNotDeleted());
         model.addAttribute("edit", true);
 

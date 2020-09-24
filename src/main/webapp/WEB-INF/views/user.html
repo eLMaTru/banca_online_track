@@ -1,249 +1,159 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="https://www.thymeleaf.org"
-  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
->
-  <head th:insert="fragments/global :: head"></head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-  <body>
+<head th:replace="fragments/global :: head"></head>
+<div th:insert="fragments/modals :: head"></div>
+
+<body>
     <!-- Navigation Bar-->
     <header th:insert="fragments/global :: header"></header>
     <!-- End Navigation Bar-->
 
     <div class="wrapper">
-      <div class="container">
-        <!-- Page-Title -->
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="page-title-box">
-              <h4 class="page-title">Usuarios (En construccion)</h4>
-            </div>
-          </div>
-        </div>
-        <!-- end page title end breadcrumb -->
-
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card-box">
-              <div class="row">
-                <div class="col-sm-8">
-                  <form>
-                    <div class="form-group search-box">
-                      <input
-                        type="text"
-                        id="search-input"
-                        class="form-control product-search"
-                        placeholder="Buscar usuario por username o correo..."
-                      />
-                      <button type="submit" class="btn btn-search">
-                        <i class="fa fa-search"></i>
-                      </button>
+        <div class="container">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Usuarios (En construccion)</h4>
                     </div>
-                  </form>
                 </div>
-                <div class="col-sm-4">
-                  <a id="btn-modal"
-                    href="#custom-modal"
-                    class="btn btn-success btn-rounded btn-md waves-effect waves-light m-b-30"
-                    data-animation="fadein"
-                    data-plugin="custommodal"
-                    data-overlaySpeed="200"
-                    data-overlayColor="#36404a"
-                    ><i class="md md-add"></i> Crear Usuario</a
-                  >
-                </div>
-              </div>
-
-              <div class="table-responsive">
-                <table
-                  class="table table-hover mails m-0 table table-actions-bar"
-                >
-                  <thead>
-                    <tr>
-                      <th style="width: 140px">
-                        <div
-                          class="checkbox checkbox-primary checkbox-single m-r-15 m-l-5"
-                        >
-                          <input id="action-checkbox" type="checkbox" />
-                          <label for="action-checkbox"></label>
-                        </div>
-                        <div class="btn-group dropdown m-l-10">
-                          <button
-                            type="button"
-                            class="btn btn-default btn-xs dropdown-toggle waves-effect waves-light"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <i class="caret"></i>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Organizar por nombre</a></li>
-                            <li><a href="#">Usuarios Activos</a></li>
-                            <li><a href="#">Usuarios Inactivos</a></li>
-                            <li><a href="#">Administradores</a></li>
-                            <li><a href="#">Supervisores</a></li>
-                          </ul>
-                        </div>
-                      </th>
-                      <th>Nombre de Usuario</th>
-                      <th>Correo</th>
-                      <th>Role</th>
-                      <th>Estatus</th>
-                      <th>Opciones</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr th:each="user : ${users}">
-                      <td>
-                        <div class="checkbox checkbox-primary m-r-15 m-l-5">
-                          <input id="checkbox2" type="checkbox" checked="" />
-                          <label for="checkbox2"></label>
-                        </div>
-
-                        <img
-                          th:src="@{/images/users/avatar-2.jpg}"
-                          alt="contact-img"
-                          title="contact-img"
-                          class="img-circle thumb-sm"
-                        />
-                      </td>
-                      <td th:text="${user.username}"></td>
-                      <td th:text="${user.email}"></td>
-                      <td>
-                        <span
-                          class="label label-info"
-                          th:text="${user.role.name}"
-                        ></span>
-                      </td>
-
-                      <td>
-                        <span class = "label" th:classappend="${user.status.name} == ENABLED ? label-success : label-danger"
-                          th:text="${user.status.name}"
-                        ></span>
-                      </td>
-                      <td>
-                        <a
-                          th:href="@{/owner/users/edit/{id}(id=${user.id})}"
-                          title="Editar Usuario"
-                          class="btn btn-primary btn-sm"
-                          ><span
-                            class="glyphicon glyphicon-edit"
-                            aria-hidden="true"
-                          ></span
-                        ></a>
-                        <a
-                          th:href="@{/owner/users/delete/{id}(id=${user.id})}"
-                          title="Eliminar Usuario"
-                          onclick="return confirm('Esta seguro de que quiere eliminar este Usuario ?')"
-                          class="btn btn-danger btn-sm"
-                          ><span
-                            class="glyphicon glyphicon-trash"
-                            aria-hidden="true"
-                          ></span
-                        ></a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- end table responsive -->
             </div>
-            <!-- end card-box -->
-</div>
-          </div>
-          <!-- end col -->
+            <!-- end page title end breadcrumb -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <form>
+                                    <div class="form-group search-box">
+                                        <input type="text" id="search-input" class="form-control product-search"
+                                            placeholder="Buscar usuario por username o correo..." />
+                                        <button type="submit" class="btn btn-search">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-4">
+                                <a id="btn-modal" href="#custom-modal"
+                                    class="btn btn-success btn-rounded btn-md waves-effect waves-light m-b-30"
+                                    data-animation="fadein" data-plugin="custommodal" data-overlaySpeed="200"
+                                    data-overlayColor="#36404a"><i class="md md-add"></i> Crear Usuario</a>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover mails m-0 table table-actions-bar">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 140px">
+                                            <div class="checkbox checkbox-primary checkbox-single m-r-15 m-l-5">
+                                                <input id="action-checkbox" type="checkbox" />
+                                                <label for="action-checkbox"></label>
+                                            </div>
+                                            <div class="btn-group dropdown m-l-10">
+                                                <button type="button"
+                                                    class="btn btn-default btn-xs dropdown-toggle waves-effect waves-light"
+                                                    data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="caret"></i>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Organizar por nombre</a></li>
+                                                    <li><a href="#">Usuarios Activos</a></li>
+                                                    <li><a href="#">Usuarios Inactivos</a></li>
+                                                    <li><a href="#">Administradores</a></li>
+                                                    <li><a href="#">Supervisores</a></li>
+                                                </ul>
+                                            </div>
+                                        </th>
+                                        <th>Nombre de Usuario</th>
+                                        <th>Correo</th>
+                                        <th>Role</th>
+                                        <th>Estatus</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr th:each="user : ${users}">
+                                        <td>
+                                            <div class="checkbox checkbox-primary m-r-15 m-l-5">
+                                                <input id="checkbox2" type="checkbox" checked="" />
+                                                <label for="checkbox2"></label>
+                                            </div>
+
+                                            <img th:src="@{/images/users/avatar-2.jpg}" alt="contact-img"
+                                                title="contact-img" class="img-circle thumb-sm" />
+                                        </td>
+                                        <td th:text="${user.username}"></td>
+                                        <td th:text="${user.email}"></td>
+                                        <td>
+                                            <span class="label label-info" th:text="${user.role.name}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class="label"
+                                                th:classappend="${user.status.name} == ENABLED ? label-success : label-danger"
+                                                th:text="${user.status.name}"></span>
+                                        </td>
+                                        <td>
+                                            <a th:href="@{/owner/users/edit/{id}(id=${user.id})}" title="Editar Usuario"
+                                                class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"
+                                                    aria-hidden="true"></span></a>
+                                            <a th:href="@{/owner/users/delete/{id}(id=${user.id})}"
+                                                title="Eliminar Usuario"
+                                                onclick="return confirm('Esta seguro de que quiere eliminar este Usuario ?')"
+                                                class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"
+                                                    aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- end table responsive -->
+                    </div>
+                    <!-- end card-box -->
+                </div>
+            </div>
+            <!-- end col -->
         </div>
         <!-- end row -->
-      </div>
-      <!-- end container -->
+    </div>
+    <!-- end container -->
     </div>
 
     <!-- Modal -->
-    <div id="custom-modal" class="modal-demo">
-      <button type="button" class="close" onclick="Custombox.close();">
-        <span>&times;</span><span class="sr-only">Cerrar</span>
-      </button>
-      <h4 class="custom-modal-title">Crear Usuario (Pendiente validar campos)</h4>
-      <li class="divider"></li>
-      <div class="custom-modal-text text-left">
-        <form action="#" th:action="@{/owner/users/save}" th:object="${user}" method="post">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input th:field="*{username}"
-              type="text"
-              class="form-control"
-              id="username"
-              placeholder="Ingrese un nombre de Usuario"
-              autocomplete="off"
-            />
-            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></td>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Correo</label>
-            <input th:field="*{email}"
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="Ingrese un Correo Electronico"
-              autocomplete="off"
-            />
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input th:field="*{password}"
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Ingrese una Contraseña"
-              autocomplete="off"
-            />
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-          </div>
-
-          <div class="form-group">
-            <label for="confirm-password">Contraseña</label>
-            <input th:field="*{passwordConfirm}"
-              type="password"
-              class="form-control"
-              id="confirm-password"
-              placeholder="Confirme la Contraseña"
-              autocomplete="off"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="role" class="col-sm-2 control-label">Role</label>
-                <select class="form-control" th:field="*{role}" id="role">
-                    <option th:each="roles : ${roles}" th:value="${roles.id}" th:text="${roles.name}"></option>
-                </select>
-        </div>
-
-          <button
-            type="submit"
-            class="btn btn-default waves-effect waves-light"
-          >
-            Crear
-          </button>
-          <button
-            onclick="Custombox.close();"
-            type="button"
-            class="btn btn-danger waves-effect waves-light m-l-10"
-          >
-            Cancelar
-          </button>
-        </form>
-      </div>
-    </div>
+    <div th:replace="fragments/modals :: userModal"></div>
     <!-- End Modal -->
-    <!-- Footer -->
-    <footer th:insert="fragments/global :: footer"></footer>
 
+    <div style="display: none;">
+        <span id="edit-helper" th:text="${edit}" />
+    </div>
+    <!-- Footer -->
+    <footer th:replace="fragments/global :: footer"></footer>
+    <div th:replace="fragments/modals :: footer"></div>
+    <script>
+        $(document).ready(function () {
+            if ($("#edit-helper").text() == 'true') {
+                $("#btn-modal").click();
+                $("#edit-helper").text('false');
+            }
+        });
+
+        function closeModal() {
+
+            $.when(Custombox.close()).done(function () {
+                window.setTimeout(function () { window.location.replace("/owner/users"); }, 500);
+
+            });
+
+
+        }
+    </script>
     <!-- End Footer -->
-  </body>
+</body>
+
 </html>

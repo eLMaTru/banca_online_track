@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.hhtech.botrack.Util;
 
@@ -20,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 
 @Entity
-@Table(name = "supervisor")
+@Table(name = "supervisor", uniqueConstraints = @UniqueConstraint(columnNames = { "pdi" }))
 @Data
 public class Supervisor extends Person {
     @Id

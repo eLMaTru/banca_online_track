@@ -5,14 +5,11 @@
   xmlns:th="https://www.thymeleaf.org"
   xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
-<head th:insert="fragments/head :: head"></head>
+  <head th:insert="fragments/global :: head"></head>
 
   <body>
     <h1>Hola ADMIN</h1>
-
-
   </body>
 
-<div th:insert="fragments/foot :: footer"></div>
-
+  <div th:insert="fragments/global :: footer"></div>
 </html>

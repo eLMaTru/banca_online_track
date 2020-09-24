@@ -41,7 +41,7 @@ public class Auditable<U> {
      * createBy
      */
     @CreatedBy
-    @Column(name = "created_by", length = 20)
+    @Column(name = "created_by", length = 20, nullable = false)
     private U createdBy;
 
     /**

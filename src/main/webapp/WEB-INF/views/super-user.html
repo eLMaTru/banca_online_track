@@ -5,15 +5,302 @@
   xmlns:th="https://www.thymeleaf.org"
   xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
-  <head th:insert="fragments/global :: head"></head>
+  <head th:replace="fragments/global :: head"></head>
+  <div th:insert="fragments/modals :: head"></div>
 
   <body>
     <!-- Navigation Bar-->
     <header th:insert="fragments/global :: header"></header>
     <!-- End Navigation Bar-->
 
+    <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="page-title-box">
+              <h4 class="page-title">Dashboard</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Consorcios
+                </p>
+                <h2 class="text-danger">
+                  <span data-plugin="counterup">34578</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activos:</b> 300</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivos:</b> 20</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Bancas registradas
+                </p>
+                <h2 class="text-success">
+                  <span data-plugin="counterup">78541</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activas:</b> 45</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivas:</b> 8</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Usuarios registrados
+                </p>
+                <h2 class="text-dark">
+                  <span data-plugin="counterup">895</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activos:</b> 465</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivos:</b> 13</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Super Usuarios
+                </p>
+                <h2 class="text-success">
+                  <span data-plugin="counterup">52410</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activos:</b> 4</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivos:</b> 1</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Administradores
+                </p>
+                <h2 class="text-warning">
+                  <span data-plugin="counterup">652</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activos:</b> 48</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivos:</b> 3</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Supervisores
+                </p>
+                <h2 class="text-primary">
+                  <span data-plugin="counterup">3245</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activos:</b> 145</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivos:</b> 3</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card-box">
+              <h4 class="header-title m-t-0 m-b-30">
+                Ultimos 5 Usuarios creados
+              </h4>
+
+              <div class="table-responsive">
+                <table class="table table table-hover m-0">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Username</th>
+                      <th>Email</th>
+
+                      <th>Estatus</th>
+                      <th>Creado por</th>
+                      <th>Creado en fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>
+                        <span class="avatar-sm-box bg-success">L</span>
+                      </th>
+                      <td>
+                        <h5 class="m-0">Louis Hansen</h5>
+                        <p class="m-0 text-muted font-13">
+                          <small>Supervisor</small>
+                        </p>
+                      </td>
+                      <td>sample@mail.com</td>
+                      <td>ENABLED</td>
+                      <td>Owner</td>
+                      <td>07/08/2016</td>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <span class="avatar-sm-box bg-primary">C</span>
+                      </th>
+                      <td>
+                        <h5 class="m-0">Craig Hause</h5>
+                        <p class="m-0 text-muted font-13">
+                          <small>Usuario</small>
+                        </p>
+                      </td>
+                      <td>sample@mail.com</td>
+                      <td>ENABLED</td>
+                      <td>Mark</td>
+                      <td>29/07/2016</td>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <span class="avatar-sm-box bg-brown">E</span>
+                      </th>
+                      <td>
+                        <h5 class="m-0">Edward Grimes</h5>
+                        <p class="m-0 text-muted font-13">
+                          <small>Supervisor</small>
+                        </p>
+                      </td>
+                      <td>sample@mail.com</td>
+                      <td>DISABLED</td>
+                      <td>Mark</td>
+                      <td>22/07/2016</td>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <span class="avatar-sm-box bg-pink">B</span>
+                      </th>
+                      <td>
+                        <h5 class="m-0">Owner</h5>
+                        <p class="m-0 text-muted font-13">
+                          <small>System Owner</small>
+                        </p>
+                      </td>
+                      <td>owner@mail.com</td>
+                      <td>ENABLED</td>
+                      <td>System</td>
+                      <td>20/07/2016</td>
+                    </tr>
+
+                    <tr>
+                      <th>
+                        <span class="avatar-sm-box bg-orange">M</span>
+                      </th>
+                      <td>
+                        <h5 class="m-0">Mark</h5>
+                        <p class="m-0 text-muted font-13">
+                          <small>Administrador</small>
+                        </p>
+                      </td>
+                      <td>sample@mail.com</td>
+                      <td>ENABLED</td>
+                      <td>Owner</td>
+                      <td>07/07/2016</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- table-responsive -->
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div th:replace="fragments/modals :: userModal"></div>
+    <!-- End Modal -->
+
+    <div style="display: none">
+      <span id="edit-helper" th:text="${edit}" />
+    </div>
     <!-- Footer -->
-    <footer th:insert="fragments/global :: footer"></footer>
+    <footer th:replace="fragments/global :: footer"></footer>
+    <div th:replace="fragments/modals :: footer"></div>
+    <!-- Dashboard init -->
+    <script th:src="@{/pages/jquery.dashboard.js}"></script>
+
+    <script>
+      $(document).ready(function () {});
+
+      function closeModal() {
+        $.when(Custombox.close()).done(function () {
+          window.setTimeout(function () {
+            window.location.replace("/owner");
+          }, 500);
+        });
+      }
+    </script>
     <!-- End Footer -->
   </body>
 </html>

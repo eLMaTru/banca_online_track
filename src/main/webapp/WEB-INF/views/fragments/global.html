@@ -19,6 +19,12 @@
     <!-- App title -->
     <title>Banca-Online-Track</title>
 
+    <!-- Modal effect css -->
+    <link
+      th:href="@{/plugins/custombox/css/custombox.min.css}"
+      rel="stylesheet"
+    />
+
     <!-- App css -->
     <link
       th:href="@{/css/bootstrap.min.css}"
@@ -140,7 +146,7 @@
                     >
                   </li>
                   <li>
-                    <a href="logout/"
+                    <a href="/logout/"
                       ><i class="ti-power-off m-r-5"></i> Salir</a
                     >
                   </li>
@@ -183,7 +189,7 @@
                         <span>Opciones</span>
                       </li>
                       <li>
-                        <a href="/owner/user"> Ver Usuarios</a>
+                        <a href="/owner/users"> Ver Usuarios</a>
                       </li>
                       <li><a href="#"> Crear Usuario</a></li>
                     </ul>
@@ -246,7 +252,7 @@
       <!-- end navbar-custom -->
     </header>
 
-    <footer th:fragment="footer">
+    <footer th:fragment="footer" class="footer text-right">
       <script>
         var resizefunc = [];
       </script>
@@ -264,6 +270,18 @@
       <!-- App js -->
       <script th:src="@{/js/jquery.core.js}"></script>
       <script th:src="@{/js/jquery.app.js}"></script>
+
+      <!-- Modal-Effect -->
+      <script th:src="@{/plugins/custombox/js/custombox.min.js}"></script>
+      <script th:src="@{/plugins/custombox/js/legacy.min.js}"></script>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            © 2016 - 2020 Horizon High Tech.
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

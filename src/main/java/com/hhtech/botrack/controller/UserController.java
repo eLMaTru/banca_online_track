@@ -1,5 +1,6 @@
 package com.hhtech.botrack.controller;
 
+import com.hhtech.botrack.model.Status;
 import com.hhtech.botrack.model.User;
 import com.hhtech.botrack.service.RoleService;
 import com.hhtech.botrack.service.SecurityService;
@@ -48,14 +49,10 @@ public class UserController {
         return "super-user";
     }
 
-    @GetMapping("/owner/user")
+    @GetMapping("/owner/users")
     public String viewUsers(Model model, @CurrentSecurityContext(expression = "authentication.name") String username) {
         model.addAttribute("username", username);
-        return "user";
-    }
-
-    @GetMapping("/users/adduser")
-    public String addUser(Model model) {
+        model.addAttribute("users", userService.findByStatusNotDeleted());
 
         Map<String, Object> map = new HashMap<>();
         map.put("roles", roleService.findAll());
@@ -63,18 +60,10 @@ public class UserController {
 
         model.addAllAttributes(map);
 
-        return "/users/add-user";
+        return "user";
     }
 
-    @GetMapping("/users/")
-    public String index(Model model) {
-
-        model.addAttribute("users", userService.findAll());
-        return "/users/index";
-
-    }
-
-    @PostMapping("/users/saveuser")
+    @PostMapping("/owner/users/save")
     public String saveUser(@Valid User user, BindingResult result, Model model) {
 
         model.addAttribute("user", user);
@@ -82,28 +71,39 @@ public class UserController {
 
         if (result.hasErrors()) {
 
-            return "/users/add-user";
+            return "user";
         }
 
+        user.setStatus(Status.Type.ENABLED.toStatus());
         userService.save(user);
 
-        return "redirect:/users/";
+        return "redirect:/owner/users";
     }
 
-    @GetMapping("/users/edituser/{id}")
+    @GetMapping("/owner/users/edit/{id}")
     public String editUser(@PathVariable("id") String id, Model model) {
 
         model.addAttribute("user", userService.findOne(id));
         model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("users", userService.findByStatusNotDeleted());
+        model.addAttribute("edit", true);
 
-        return "/users/edit-user";
+        Map<String, Object> map = new HashMap<>();
+        map.put("roles", roleService.findAll());
+        map.put("user", userService.findOne(id));
+
+        model.addAllAttributes(map);
+
+        return "user";
     }
 
-    @GetMapping("/users/deleteuser/{id}")
+    @GetMapping("/owner/users/delete/{id}")
     public String deleteUser(@PathVariable("id") String id, Model model) {
 
-        userService.deleteOne(id);
+        User user = userService.findOne(id);
+        user.setStatus(Status.Type.DELETED.toStatus());
+        userService.save(user);
 
-        return "redirect:/users/";
+        return "redirect:/owner/users/";
     }
 }

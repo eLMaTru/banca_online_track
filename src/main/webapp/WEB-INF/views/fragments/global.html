@@ -3,7 +3,7 @@
   lang="en"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="https://www.thymeleaf.org"
-  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 >
   <head>
     <meta charset="utf-8" />
@@ -133,7 +133,7 @@
                   class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list"
                 >
                   <li class="text-center">
-                    <h5>Hola, <span th:text="${username}" /></h5>
+                    <h5>Hola, <span sec:authentication="name">...</span></h5>
                   </li>
                   <li>
                     <a href="javascript:void(0)"
@@ -175,7 +175,7 @@
                 <a href="#"><i class="mdi mdi-view-dashboard"></i>Dashboard</a>
               </li>
 
-              <li class="has-submenu" sec:authorize="hasRole('SUPER_USER')">
+              <li class="has-submenu">
                 <a href="#"><i class="mdi mdi-account"></i>Usuario</a>
                 <ul class="submenu megamenu">
                   <li>
@@ -201,7 +201,10 @@
                   </li>
                 </ul>
               </li>
-              <li class="has-submenu">
+              <li
+                class="has-submenu"
+                sec:authorize="hasAuthority('SUPER_USER')"
+              >
                 <a href="#"><i class="mdi mdi-checkerboard"></i>Consorcio</a>
                 <ul class="submenu megamenu">
                   <li>

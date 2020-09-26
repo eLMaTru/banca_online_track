@@ -70,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutUrl("/logout/").logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true).and().sessionManagement().sessionFixation().migrateSession()
                 .invalidSessionUrl("/home");
+        ;
 
         super.configure(http);
 

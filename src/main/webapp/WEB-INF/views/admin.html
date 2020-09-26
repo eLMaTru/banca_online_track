@@ -5,11 +5,159 @@
   xmlns:th="https://www.thymeleaf.org"
   xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
-  <head th:insert="fragments/global :: head"></head>
+  <head th:replace="fragments/global :: head"></head>
 
   <body>
-    <h1>Hola ADMIN</h1>
-  </body>
+    <!-- Navigation Bar-->
+    <header th:insert="fragments/global :: header"></header>
+    <!-- End Navigation Bar-->
 
-  <div th:insert="fragments/global :: footer"></div>
+    <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="page-title-box">
+              <h4 class="page-title"></h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Supervisores
+                </p>
+                <h2 class="text-primary">
+                  <span data-plugin="counterup">5</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activos:</b> 4</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivos:</b> 1</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Banqueras
+                </p>
+                <h2 class="text-warning">
+                  <span data-plugin="counterup">30</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activas:</b> 25</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivas:</b> 5</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Bancas
+                </p>
+                <h2 class="text-dark">
+                  <span data-plugin="counterup">30</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">Activas:</b> 28</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">Inactivas:</b> 2</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Bancas pagas este año
+                </p>
+                <h2 class="text-success">
+                  <span data-plugin="counterup">22</span>
+                </h2>
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Bancas pendientes por pagar
+                </p>
+                <h2 class="text-warning">
+                  <span data-plugin="counterup">8</span>
+                </h2>
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+
+          <div class="col-lg-2 col-md-4 col-sm-6">
+            <div class="card-box widget-box-one">
+              <div class="wigdet-one-content">
+                <p
+                  class="m-0 text-uppercase font-600 font-secondary text-overflow"
+                >
+                  Total pendiente por pagar
+                </p>
+                <h2 class="text-danger">
+                  <span data-plugin="counterup">265,000.00</span>
+                </h2>
+                <span class="text-muted m-0 pull-left"
+                  ><b class="text-success">mensual:</b> 1</span
+                >
+                <span class="text-muted m-0 pull-right"
+                  ><b class="text-danger">anual:</b> 7</span
+                >
+                <br />
+              </div>
+            </div>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="fragments/global :: footer"></footer>
+    <div th:replace="fragments/modals :: footer"></div>
+    <!-- Dashboard init -->
+    <script th:src="@{/pages/jquery.dashboard.js}"></script>
+    <!-- End Footer -->
+  </body>
 </html>

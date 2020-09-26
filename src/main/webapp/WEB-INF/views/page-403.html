@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="account-pages-bg">
+  <head th:replace="fragments/global :: head"></head>
+
+  <body class="bg-transparent">
+    <!-- HOME -->
+    <section>
+      <div class="container-alt">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="wrapper-page">
+              <img src="@{/images/403.jpg}" alt="" height="120" />
+              <h2 class="text-uppercase text-danger">
+                Ups! No tienes permiso para llegar aqui
+              </h2>
+              <p class="text-muted">
+                Estas intentando acceder a una zona restringida de la App, si
+                crees que debes tener permiso para acceder, por favor contacta a
+                tu administrador.
+              </p>
+
+              <a
+                class="btn btn-success waves-effect waves-light m-t-20"
+                href="#"
+              >
+                Volver a tras</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer th:replace="fragments/global :: footer"></footer>
+  </body>
+</html>

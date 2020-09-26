@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Controller
 @Data // Lombok: adds getters and setters
-public class UserController {
+public class OwnerController {
 
     private UserService userService;
 
@@ -38,7 +38,7 @@ public class UserController {
 
     private final List<Status> status = new ArrayList<>(2);
 
-    public UserController(UserService userService, RoleService roleService, SecurityService securityService,
+    public OwnerController(UserService userService, RoleService roleService, SecurityService securityService,
             UserValidator userValidator) {
         this.userService = userService;
         this.roleService = roleService;
@@ -46,24 +46,7 @@ public class UserController {
         this.userValidator = userValidator;
     }
 
-    @GetMapping("/owner")
-    public String superUser(Model model, @CurrentSecurityContext(expression = "authentication.name") String username) {
-        // note: usar condicion: username = people.name !=
-        // null?people.name:user.username
-        model.addAttribute("username", username);
-        model.addAttribute("users", userService.findByStatusNotDeleted());
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("roles", roleService.findAll());
-        status.clear();
-        status.add(Status.Type.ENABLED.toStatus());
-        status.add(Status.Type.DISABLED.toStatus());
-        map.put("status", status);
-        map.put("user", new User());
-
-        model.addAllAttributes(map);
-        return "super-user";
-    }
 
     @GetMapping("/owner/users")
     public String viewUsers(Model model, @CurrentSecurityContext(expression = "authentication.name") String username) {

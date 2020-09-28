@@ -1,6 +1,5 @@
 package com.hhtech.botrack.service;
 
-import com.hhtech.botrack.model.Status;
 import com.hhtech.botrack.model.SupervisorBank;
 import com.hhtech.botrack.repository.SupervisorBankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,17 +62,5 @@ public class SupervisorBankService {
     public List<SupervisorBank> findAll() {
         return supervisorBankRepository.findAll();
     }
-
-
-    /**
-     * Find by status not deleted list.
-     *
-     * @return the list
-     */
-    public List<SupervisorBank> findByStatusNotDeleted() {
-        return supervisorBankRepository.findByStatusNotIn(Status.Type.DELETED.toStatus());
-    }
-
-
 
 }

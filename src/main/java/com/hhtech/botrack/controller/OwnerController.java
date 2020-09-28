@@ -7,7 +7,6 @@ import com.hhtech.botrack.service.SecurityService;
 import com.hhtech.botrack.service.UserService;
 import com.hhtech.botrack.validation.UserValidator;
 
-import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@Data // Lombok: adds getters and setters
+@Data
 public class OwnerController {
 
     private UserService userService;
@@ -46,11 +45,8 @@ public class OwnerController {
         this.userValidator = userValidator;
     }
 
-
-
     @GetMapping("/owner/users")
-    public String viewUsers(Model model, @CurrentSecurityContext(expression = "authentication.name") String username) {
-        model.addAttribute("username", username);
+    public String viewUsers(Model model) {
         model.addAttribute("users", userService.findByStatusNotDeleted());
 
         Map<String, Object> map = new HashMap<>();

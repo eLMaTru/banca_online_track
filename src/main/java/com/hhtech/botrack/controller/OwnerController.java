@@ -104,6 +104,7 @@ public class OwnerController {
 
         User user = userService.findOne(id);
         user.setStatus(Status.Type.DELETED.toStatus());
+        user.setPasswordConfirm(user.getPassword());
         userService.save(user);
 
         return "redirect:/owner/users/";

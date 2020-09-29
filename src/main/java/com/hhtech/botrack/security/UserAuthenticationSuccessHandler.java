@@ -82,13 +82,13 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
         }
 
         if (isSuperUser) {
-            return "/owner";
+            return "/owner/dashboard";
         } else if (isAdmin) {
-            return "/admin";
+            return "/admin/dashboard";
         } else if (isSupervisor) {
-            return "/supervisor";
+            return "/supervisor/dashboard";
         } else if (isUser) {
-            return "/user";
+            return "/user/dashboard";
         } else {
             throw new IllegalStateException();
         }

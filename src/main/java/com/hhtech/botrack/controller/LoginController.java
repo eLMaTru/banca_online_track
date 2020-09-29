@@ -24,7 +24,7 @@ public class LoginController {
     private RoleService roleService;
     private final List<Status> status = new ArrayList<>(2);
 
-    @GetMapping("/owner")
+    @GetMapping("/owner/dashboard")
     public String superUserLogin(Model model) {
         Map<String, Object> map = new HashMap<>();
         map.put("roles", roleService.findAll());
@@ -38,7 +38,7 @@ public class LoginController {
         return "super-user";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/dashboard")
     public String adminLogin(Model model) {
 
         return "admin";

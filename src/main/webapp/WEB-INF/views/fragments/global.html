@@ -54,7 +54,7 @@
             <!--Zircos-->
             <!--</a>-->
             <!-- Image Logo -->
-            <a href="" class="logo">
+            <a href="./dashboard" class="logo">
               <img th:src="@{/images/logo.png}" alt="" height="80" />
             </a>
           </div>
@@ -172,7 +172,9 @@
             <!-- Navigation Menu-->
             <ul class="navigation-menu">
               <li class="has-submenu">
-                <a href="#"><i class="mdi mdi-view-dashboard"></i>Dashboard</a>
+                <a href="./dashboard"
+                  ><i class="mdi mdi-view-dashboard"></i>Dashboard</a
+                >
               </li>
 
               <li class="has-submenu">
@@ -221,7 +223,10 @@
                 </ul>
               </li>
 
-              <li class="has-submenu">
+              <li
+                class="has-submenu"
+                sec:authorize="hasAuthority('SUPER_USER')"
+              >
                 <a href="#"><i class="mdi mdi-collage"></i>Socio</a>
                 <ul class="submenu megamenu">
                   <li>
